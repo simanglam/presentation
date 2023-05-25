@@ -1,0 +1,70 @@
+\documentclass[12pt, svgnames]{article}
+\usepackage{luatexja-fontspec}
+\usepackage{fontspec}
+\setmainjfont{Wt004.ttf}
+%\setmainjfont{王漢宗特明體繁}
+\usepackage{xcolor}
+\definecolor{mygreen}{HTML}{608066}
+\definecolor{mylightgreen}{HTML}{aad2ba}
+\definecolor{mydarkgreen}{HTML}{1d1e18}
+\usepackage{tikz}
+\usetikzlibrary{lindenmayersystems, external}
+\pgfdeclarelindenmayersystem{mytree}{
+\rule{F->FF}
+\rule{X->F[+X][-X]FX}
+}
+\pgfdeclarelindenmayersystem{myrule}{
+\rule{F->F}
+\rule{X->F[+X][X][-X]FX}
+}
+\pgfdeclarelindenmayersystem{snowflake}{
+\rule{F->FX}
+\rule{X->[+F][-F]F}
+}
+\usepackage{tcolorbox}
+%\usetikzlibrary{position, anchor}
+\tcbuselibrary{skins, minted, raster}
+\usepackage{minted}
+\usepackage{animate}
+\usepackage{graphicx}
+\graphicspath{{圖片/}{法陣/}{舞/}{轉/}{waiting/}{sin/}{bloom/}}
+\usepackage{geometry}
+\usepackage{chemfig}
+\usepackage{mhchem}
+\usepackage{amsmath}
+\usepackage{tikzorbital}
+\usepackage{luacode}
+\usepackage{multicol}
+\geometry{papersize = {128mm, 96mm}, margin = 20mm, top = 2mm, bottom = 2mm}
+\setlength{\parindent}{0mm}
+\pagecolor{mylightgreen}
+\newtcolorbox{mybox}[1]{width = \textwidth, coltext = mydarkgreen, arc = 0mm, colframe = #1, colback = #1}
+\newtcolorbox{figboxs}{width = \textwidth, arc = 0mm, colback = mygreen!30!white, colframe = mygreen}
+\newtcolorbox{figbox}{width = \textwidth, height = \textheight - 48pt, arc = 0mm, colback = mygreen!30!white, colframe = mygreen}
+\color{mydarkgreen}
+
+\renewcommand{\thepage}{\relax}
+\renewcommand{\section}[1]{\centerbox{#1}\newpage}
+\tcbset{width = 0.5\textwidth, colframe = mygreen, colback = mygreen, coltext = mydarkgreen, fontupper = \large}
+\newcommand{\centerbox}[1]{
+\mbox{ }\vfill
+\begin{mybox}{mygreen}
+\centering{\Large #1}
+\end{mybox}
+\mbox{ }\vfill
+}
+
+\newcommand{\myvcenter}[2]{
+\mbox{ }\vfill
+\begin{center}
+{#1#2}
+\end{center}
+\mbox{ }\vfill
+}
+\begin{document}
+\input{第一頁.tex}
+\newpage
+\newgeometry{margin = 10mm}
+\input{part1}
+
+\end{document}

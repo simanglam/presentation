@@ -1,0 +1,659 @@
+\documentclass[12pt, svgnames]{article}
+\usepackage{luatexja-fontspec}
+\usepackage{fontspec}
+\setmainjfont{Wt004.ttf}
+%\setmainjfont{王漢宗特明體繁}
+\usepackage{xcolor}
+\definecolor{mygreen}{HTML}{608066}
+\definecolor{mylightgreen}{HTML}{aad2ba}
+\definecolor{mydarkgreen}{HTML}{1d1e18}
+\usepackage{tikz}
+\usetikzlibrary{lindenmayersystems, external}
+\pgfdeclarelindenmayersystem{mytree}{
+\rule{F->FF}
+\rule{X->F[+X][-X]FX}
+}
+\pgfdeclarelindenmayersystem{myrule}{
+\rule{F->F}
+\rule{X->F[+X][X][-X]FX}
+}
+\pgfdeclarelindenmayersystem{snowflake}{
+\rule{F->FX}
+\rule{X->[+F][-F]F}
+}
+\usepackage{tcolorbox}
+%\usetikzlibrary{position, anchor}
+\tcbuselibrary{skins, minted, raster}
+\usepackage{minted}
+\usepackage{animate}
+\usepackage{graphicx}
+\graphicspath{{圖片/}{法陣/}{舞/}{轉/}{waiting/}{sin/}{bloom/}}
+\usepackage{geometry}
+\usepackage{chemfig}
+\usepackage{mhchem}
+\usepackage{amsmath}
+\usepackage{tikzorbital}
+\usepackage{luacode}
+\usepackage{multicol}
+\geometry{papersize = {128mm, 96mm}, margin = 20mm, top = 2mm, bottom = 2mm}
+\setlength{\parindent}{0mm}
+\pagecolor{mylightgreen}
+\newtcolorbox{mybox}[1]{width = \textwidth, coltext = mydarkgreen, arc = 0mm, colframe = #1, colback = #1}
+\newtcolorbox{figboxs}{width = \textwidth, arc = 0mm, colback = mygreen!30!white, colframe = mygreen}
+\newtcolorbox{figbox}{width = \textwidth, height = \textheight - 48pt, arc = 0mm, colback = mygreen!30!white, colframe = mygreen}
+\color{mydarkgreen}
+
+\renewcommand{\thepage}{\relax}
+\renewcommand{\section}[1]{\centerbox{#1}\newpage}
+\tcbset{width = 0.5\textwidth, colframe = mygreen, colback = mygreen, coltext = mydarkgreen, fontupper = \large}
+\newcommand{\centerbox}[1]{
+\mbox{ }\vfill
+\begin{mybox}{mygreen}
+\centering{\Large #1}
+\end{mybox}
+\mbox{ }\vfill
+}
+
+\newcommand{\myvcenter}[2]{
+\mbox{ }\vfill
+\begin{center}
+{#1#2}
+\end{center}
+\mbox{ }\vfill
+}
+\begin{document}
+\input{第一頁.tex}
+\newpage
+\newgeometry{margin = 10mm}
+\input{part2.tex}
+\end{document}
+\section{作品欣賞}
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{快門.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{五芒星.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{音韻季.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{煙火.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{曼陀羅.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{星河.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{五瓣花.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{異想天開.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\begin{center}
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight]{楓葉.pdf}
+\end{figboxs}
+\end{center}
+\newpage
+%%%%%
+\myvcenter{\huge}{以上皆為程式語言繪製}
+\newpage
+%%%%%
+\myvcenter{\huge}{為什麼要用程式語言繪圖？}
+\newpage
+%%%%%
+\section{你的右上角不是我的右上角}
+\begin{tcolorbox}[width = \textwidth]
+\centering
+你的右上角不是我的右上角
+\end{tcolorbox}
+\vskip0.5cm
+\begin{center}
+\begin{tikzpicture}
+\draw (2,2) rectangle (-2,-2);
+\draw[<-] (2.5,0)--(-2.5,0);
+\draw[<-] (0,2.5)--(0,-2.5);
+\end{tikzpicture}
+\end{center}
+%%%%%
+\begin{luacode}
+local arr = {
+	"(2,2)",
+	"(1.8,1.8)",
+	"(1.9,1.9)",
+	"(1.7,1.9)",
+	"(1.9,1.7)",
+	"(1.6,1.9)",
+	"(2,1.9)", 
+	"(1.9,2)", 
+	"(1.9,1.8)", 
+	"(2.07,2.07)"
+ }
+for i = 1,10 do
+tex.sprint("\\newpage")
+tex.sprint("\\begin{tcolorbox}[width = \\textwidth]")
+tex.sprint("\\centering")
+tex.sprint("你的右上角不是我的右上角")
+tex.sprint("\\end{tcolorbox}")
+tex.sprint("\\vskip0.5cm")
+tex.sprint("\\begin{center}")
+tex.sprint("\\begin{tikzpicture}")
+tex.sprint("\\draw (2,2) rectangle (-2,-2);")
+tex.sprint("\\draw[<-] (2.5,0)--(-2.5,0);")
+tex.sprint("\\draw[<-] (0,2.5)--(0,-2.5);")
+for x = 1,i do
+tex.sprint("\\draw ".. arr[x] .." circle (0.1);")
+end
+tex.sprint("\\end{tikzpicture}")
+tex.sprint("\\end{center}")
+end
+\end{luacode}
+\newpage
+%%%%%
+\begin{tcolorbox}[width = \textwidth]
+\centering
+在 $(2,2)$ 上的一點
+\end{tcolorbox}
+\vskip0.5cm
+\begin{center}
+\begin{tikzpicture}
+\draw (2,2) rectangle (-2,-2);
+\draw[<-] (2.5,0)--(-2.5,0);
+\draw[<-] (0,2.5)--(0,-2.5);
+\draw (2,2) circle (0.1);
+\end{tikzpicture}
+\end{center}
+\newpage
+%%%%%
+\begin{tcolorbox}[width = \textwidth]
+\centering
+在 $[\sqrt{8}:45^\circ]$ 上的一點
+\end{tcolorbox}
+\vskip0.5cm
+\begin{center}
+\begin{tikzpicture}
+\draw (2,2) rectangle (-2,-2);
+\draw[<-] (2.5,0)--(-2.5,0);
+\draw[<-] (0,2.5)--(0,-2.5);
+\draw (45:{sqrt(8)}) circle (0.1);
+\end{tikzpicture}
+\end{center}
+\newpage
+%%%%%
+\begin{tcolorbox}[width = \textwidth]
+\centering
+在 $[\sqrt{8}:\left(\frac{\pi}{4}\right)]$ 上的一點
+\end{tcolorbox}
+\vskip0.5cm
+\begin{center}
+\begin{tikzpicture}
+\draw (2,2) rectangle (-2,-2);
+\draw[<-] (2.5,0)--(-2.5,0);
+\draw[<-] (0,2.5)--(0,-2.5);
+\draw (45:{sqrt(8)}) circle (0.1);
+\end{tikzpicture}
+\end{center}
+\newpage
+%%%%%
+\begin{tcolorbox}[width = \textwidth]
+\centering
+在 $(2\sqrt{2}\times\sin(45^\circ),2\sqrt{2}\times\cos(45^\circ))$ 上的一點
+\end{tcolorbox}
+\vskip0.5cm
+\begin{center}
+\begin{tikzpicture}
+\draw (2,2) rectangle (-2,-2);
+\draw[<-] (2.5,0)--(-2.5,0);
+\draw[<-] (0,2.5)--(0,-2.5);
+\draw (2,2) circle (0.1);
+\end{tikzpicture}
+\end{center}
+\newpage
+%%%%%
+\centerbox{數學描述是不會變動的}
+\newpage
+%%%%%
+\section{幾何之美}
+\begin{tcolorbox}
+幾何之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[height = \textheight -72pt]{快門.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+幾何之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{tikzpicture}
+\draw (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+計算過程
+\end{tcolorbox}
+\begin{figbox}
+\begin{tikzpicture}
+\draw (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+計算過程
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{tikzpicture}
+\draw (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\draw[line width = 1.5pt, red] (60:{(2.5/sqrt(3))})--(0,0)--(120:{(2.5/sqrt(3))});
+\end{tikzpicture}
+\columnbreak
+
+
+\tikz \draw[red, line width = 0.25cm] (0,0)--(0.5,0) node[right] {2};
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+計算過程
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{tikzpicture}
+\draw (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\draw[line width = 1.5pt, red] (120:{(2.5/sqrt(3))})--(0,0)--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\draw[line width = 1.5pt, blue] (120:{(2.5/sqrt(3))})--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\end{tikzpicture}
+\columnbreak
+
+
+\tikz \draw[red, line width = 0.25cm] (0,0)--(0.5,0) node[right] {2};
+\\
+\tikz \draw[blue, line width = 0.25cm] (0,0)--(0.5,0) node[right] {1};
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+
+\begin{tcolorbox}
+計算過程
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{tikzpicture}
+\draw (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\draw[line width = 1.5pt, red] (120:{(2.5/sqrt(3))})--(0,0)--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\draw[line width = 1.5pt, blue] (120:{(2.5/sqrt(3))})--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\draw[line width = 1.5pt, green] (120:{(2.5/sqrt(3))})--(90:2.5)--(90:{(2.5/sqrt(3)*sqrt(3)/2)});
+\end{tikzpicture}
+\columnbreak
+
+
+\tikz \draw[red, line width = 0.25cm] (0,0)--(0.5,0) node[right] {2};
+\\
+\tikz \draw[blue, line width = 0.25cm] (0,0)--(0.5,0) node[right] {1};
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+計算過程
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{tikzpicture}
+\draw[draw = none] (30:2.5)--(90:2.5)--(150:2.5)--(210:2.5)--(270:2.5)--(330:2.5)--cycle;
+\draw[draw = none] (0:{(2.5/sqrt(3))})--(60:{(2.5/sqrt(3))})--(120:{(2.5/sqrt(3))})--(180:{(2.5/sqrt(3))})--(240:{(2.5/sqrt(3))})--(300:{(2.5/sqrt(3))})--cycle;
+\draw[line width = 1.5pt, red] (120:{(2.5/sqrt(3))})--(0,0)--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\draw[line width = 1.5pt, blue] (120:{(2.5/sqrt(3))})--(90:{(2.5/sqrt(3))*sqrt(3)/2});
+\draw[line width = 1.5pt, green] (120:{(2.5/sqrt(3))})--(90:2.5)--(90:{(2.5/sqrt(3)*sqrt(3)/2)});
+\node[left] at(0,0) {O};
+\node[left] at(120:{(2.5/sqrt(3))}) {A};
+\node[right] at(90:{(2.5/sqrt(3))*sqrt(3)/2}) {B};
+\node[right] at(90:2.5) {C};
+\end{tikzpicture}
+\columnbreak
+
+
+\tikz \draw[red, line width = 0.25cm] (0,0)--(0.5,0) node[right] {2};
+\\
+\tikz \draw[blue, line width = 0.25cm] (0,0)--(0.5,0) node[right] {1};
+\\
+\(
+\text{\triangle ABO 與\triangle ABC 中}\\
+\overline{AB} = \overline{AB}\\
+\angle OAB = \angle CAB\\
+\angle OBA = \angle CBA \perp\\
+\triangle ABO \cong \triangle ABC (ASA)
+\)
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+幾何之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[height = \textheight -72pt]{快門.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\section{規律之美}
+\begin{tcolorbox}
+規律之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[]{規律之美.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+規律之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{luacode}
+tex.sprint("\\begin{tikzpicture}")
+z = 1
+for i = 0.4,2.6,0.2 do
+z= z + 1
+	for y = 0,350,10 do
+	z= z + 1
+		if (z%2 ~= 0) then 
+			tex.sprint("\\draw ("..y..":"..i..") circle (0.1);")
+		else
+		end
+	end
+end
+tex.sprint("\\end{tikzpicture}")
+\end{luacode}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+規律之美
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{luacode}
+tex.sprint("\\begin{tikzpicture}[scale = 0.75]")
+z = 1
+for i = 0.4,2.6,0.2 do
+-- z= z + 1
+	for y = 0,350,10 do
+	z= z + 1
+		if (z%2 ~= 0) then 
+			tex.sprint("\\draw ("..y..":"..i..") circle (0.1);")
+		else
+		end
+	end
+end
+tex.sprint("\\end{tikzpicture}")
+\end{luacode}
+\columnbreak
+\begin{Large}
+\begin{enumerate}
+\item 每隔一段距離畫出一個圓圈
+\end{enumerate}
+\end{Large}
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+規律之美
+\end{tcolorbox}
+\begin{figbox}
+\begin{multicols}{2}
+\begin{luacode}
+tex.sprint("\\begin{tikzpicture}[scale = 0.75]")
+z = 1
+for i = 0.4,2.6,0.2 do
+z= z + 1
+	for y = 0,350,10 do
+	z= z + 1
+		if (z%2 ~= 0) then 
+			tex.sprint("\\draw ("..y..":"..i..") circle (0.1);")
+		else
+		end
+	end
+end
+tex.sprint("\\end{tikzpicture}")
+\end{luacode}
+\columnbreak
+\begin{Large}
+\begin{enumerate}
+\item 每隔一段距離畫出一個圓圈
+\item 將相鄰兩層的圓圈錯開
+\end{enumerate}
+\end{Large}
+\end{multicols}
+\end{figbox}
+\newpage
+%%%%%
+\section{遞迴之美}
+\centerbox{遞迴？}
+\newpage
+%%%%%
+\begin{tcolorbox}
+遞迴之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\vspace{2cm}
+\begin{tikzpicture}
+\draw [green!50!black, rotate = 90]
+    [l-system={myrule, axiom=FFFX, order=2, step=0.5cm, angle=45}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+遞迴之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\vspace{1cm}
+\begin{tikzpicture}
+\draw [green!50!black, rotate = 90]
+    [l-system={myrule, axiom=FFFX, order=3, step=0.5cm, angle=45}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+遞迴之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{tikzpicture}
+\draw [green!50!black, rotate = 90]
+    [l-system={myrule, axiom=FFFX, order=4, step=0.5cm, angle=45}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+遞迴之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{tikzpicture}
+\draw [black, rotate = 90]
+    [l-system={snowflake, axiom=[+X][++X][+++X][++++X][-X][--X][---X], order=4, step=0.75cm, angle=45}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+遞迴之美
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{tikzpicture}
+\draw [black, rotate = 90]
+    [l-system={mytree, axiom=X, order=5, step=0.825mm, angle=30}]
+    lindenmayer system; 
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\section{亂中有序}
+\begin{tcolorbox}
+亂中有序
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[height = \textheight -72pt]{異想天開.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+亂中有序
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\tikz[x = 50.7mm, y = 50.7mm] \draw (0,0) circle (0.5);
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+亂中有序
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[height = \textheight -72pt]{異想天開-1.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+亂中有序
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\begin{tikzpicture}[x = 50.7mm, y = 50.7mm]
+\draw[draw=none] (0,0) circle (0.5);
+\draw[domain = -0.5:0.5, samples = 500, variable = \x] plot (\x, {0.12*sin(180*(\x/0.5))});
+\end{tikzpicture}
+\end{figbox}
+\newpage
+%%%%%
+\begin{tcolorbox}
+亂中有序
+\end{tcolorbox}
+\begin{figbox}
+\centering
+\includegraphics[height = \textheight -72pt]{異想天開-2.pdf}
+\end{figbox}
+\newpage
+%%%%%
+\section{路途上的難處？}
+\newpage
+%%%%%
+\begin{tcolorbox}
+一手資料
+\end{tcolorbox}
+\begin{LARGE}
+\begin{itemize}
+\item \TeX\ User Group
+\item CTAN
+\item 郵件論壇
+\end{itemize}
+\end{LARGE}
+\newpage
+%%%%%
+\begin{tcolorbox}
+中文資料
+\end{tcolorbox}
+\begin{LARGE}
+\begin{itemize}
+\item 年代久遠
+\item 數量稀少
+\end{itemize}
+\end{LARGE}
+\newpage
+%%%%%
+\begin{tcolorbox}
+會有幫助的技能
+\end{tcolorbox}
+\begin{LARGE}
+\begin{itemize}
+\item 外語能力
+\item 追根究底的心
+\item 高超的搜尋能力
+\end{itemize}
+\end{LARGE}
+\newpage
+%%%%%
+\myvcenter{\huge}{為什麼不自己撰寫資料呢？}
+\newpage
+%%%%%
+\begin{figboxs}
+\centering
+\includegraphics[height = \textheight - 24pt, trim={19cm 0 0 0}, clip]{封面.pdf}
+\end{figboxs}
+\myvcenter{\huge}{謝謝大家}
+
+\end{document}

@@ -1,0 +1,55 @@
+\documentclass[svgnames]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{external}
+\usepackage[]{xcolor}
+\usepackage[luatex, export]{animate}
+\usepackage{luacode}
+\definecolor{mygreen}{HTML}{608066}
+\definecolor{mylightgreen}{HTML}{aad2ba}
+\definecolor{mydarkgreen}{HTML}{1d1e18}
+\pagecolor{mygreen!30!white}
+\begin{document}
+\begin{luacode}
+tex.sprint("\\begin{animateinline}{12}")
+for i = 0,0.12,0.01 do
+tex.sprint("\\begin{tikzpicture}[x = 50.7mm, y = 50.7mm]")
+tex.sprint("\\draw[draw=none] (0,0) circle (0.5);")
+tex.sprint("\\draw[domain = -0.5:0.5, samples = 500] plot (\\x, {".. i .. "*sin(180*(\\x/0.5))});")
+tex.sprint("\\draw[domain = -0.5:0.5, samples = 500] plot (\\x, {".. i .. "*sin(180*(\\x/0.5)+180)});")
+for rotate = 45,135,45 do
+tex.sprint("\\begin{scope}[rotate = ".. rotate .."]")
+tex.sprint("\\draw[domain = -0.5:0.5, samples = 500] plot (\\x, {".. i .. "*sin(180*(\\x/0.5)+180)});")
+tex.sprint("\\draw[domain = -0.5:0.5, samples = 500] plot (\\x, {".. i .. "*sin(180*(\\x/0.5))});")
+tex.sprint("\\end{scope}")
+end
+tex.sprint("\\end{tikzpicture}")
+if i > 0.11 then
+else
+	tex.sprint("\\newframe")
+end
+end
+tex.sprint("\\end{animateinline}")
+\end{luacode}
+\end{document}
+\begin{tikzpicture}[x = 50.7mm, y = 50.7mm]
+\draw[draw=none] (0,0) circle (0.5);
+\draw[domain = -0.5:0.5, samples = 500, variable = \x] plot (\x, {0.12*sin(180*(\x/0.5))});
+\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5)+180)});
+%\draw (0:0.5)--(180:0.5)
+%\draw (45:0.5)--(225:0.5)
+%\draw (90:0.5)--(270:0.5)
+%\draw (135:0.5)--(315:0.5)
+%\begin{scope}[rotate = 45]
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5))});
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5)+180)});
+%\end{scope}
+%\begin{scope}[rotate = 90]
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5))});
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5)+180)});
+%\end{scope}
+%\begin{scope}[rotate = 135]
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5))});
+%\draw[domain = -0.5:0.5, samples = 500] plot (\x, {0.12*sin(180*(\x/0.5)+180)});
+%\end{scope}
+\end{tikzpicture}
+\end{document}
